@@ -1,0 +1,16 @@
+.grocery-item {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  margin: 10px;
+  width: 150px;
+  height: 150px;
+}
+
+.grocery-container{
+  cursor: 'pointer' 
+}
+
+.marked-grocery {
+  border: 2px solid red;
+}
+
