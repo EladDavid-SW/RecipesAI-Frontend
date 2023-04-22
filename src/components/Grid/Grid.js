@@ -1,33 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Grocery from '../Grocery/Grocery'
 import './Grid.css'
 import axios from 'axios'
 import { Box, Grid, TextField, Typography } from '@material-ui/core'
 
-const useStyles = makeStyles((theme) => ({
-  ltr_input: {
-    width: '20%',
-    padding: '0px',
-    direction: 'ltr',
-  },
-  textField: {
-    width: '20%',
-    padding: '0px',
-  },
-
-  select_element: {
-    width: '220px',
-    padding: '0px',
-  },
-  title_type: {
-    textAlign: 'center',
-  },
-}))
+const groceryList = ['apple', 'mango','pineapple']
 
 function GridComponent(props) {
-  const classes = useStyles()
-
   const [markedGroceries, setMarkedGroceries] = useState([])
+  const [photos, setPhotos] = useState([])
+
+  useEffect(() => {
+    async function fetchPhotos() {
+      const response = await axios.post('http://localhost:3001/dali_e/', { prompts: groceryList })
+      console.log(response.data);
+      setPhotos(response.data.images)
+    }
+    fetchPhotos()
+  }, [])
 
   function handleGroceryClick(grocery) {
     if (grocery.isMarked) setMarkedGroceries([...markedGroceries, grocery])
@@ -63,17 +53,17 @@ function GridComponent(props) {
       <Grid container spacing={2} justifyContent='center'>
         <Grid item xs={12}>
           <Grid container justifyContent='center'>
-            <Typography variant='h4' sx={{ color: 'text.secondary' }}>
-              {'dddd'}
+            <Typography variant='h4' sx={{ color: 'text.secondary', fontWeight: 'bold', marginBottom: '1rem', fontFamily: 'Helvetica Neue, sans-serif' }}>
+              Delicious Recipes
             </Typography>
           </Grid>
         </Grid>
 
         <Grid item xs={12}>
           <Grid container justifyContent='center'>
-            {props.photos.map((photo) => (
-              <Grid item key={photo.id} xs={12} sm={6} md={4} lg={3} className='grid-item'>
-                <Grocery src={photo.src} name={photo.name} onGroceryClick={handleGroceryClick} />
+            {photos.map((photo) => (
+              <Grid item xs={12} sm={6} md={4} lg={3} className='grid-item'>
+                <Grocery src={photo.url} name={photo.prompt} onGroceryClick={handleGroceryClick} />
               </Grid>
             ))}
           </Grid>
