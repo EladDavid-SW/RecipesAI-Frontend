@@ -12,7 +12,7 @@ function GridComponent(props) {
 
   useEffect(() => {
     async function fetchPhotos() {
-      const response = await axios.post('http://localhost:3001/dali_e/', { prompts: groceryList })
+      const response = await axios.post('http://localhost:3001/images/', { images: groceryList })
       console.log(response.data);
       setPhotos(response.data.images)
     }
