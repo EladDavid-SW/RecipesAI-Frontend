@@ -1,12 +1,17 @@
-import React from 'react'
-import Grid from './components/Grid/Grid'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Recipes from './pages/Recipes';
+
+
 function App() {
-  
   return (
-    <div className='app-container'>
-      <Grid></Grid>
-    </div>
-  )
+    <Router>
+      <Routes>
+        <Route path='/' element={<Recipes />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+
+export default App;

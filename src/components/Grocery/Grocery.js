@@ -7,7 +7,7 @@ function Grocery({ name, src, onGroceryClick }) {
   async function handleClick() {
     await setIsMarked(!isMarked)
   }
-
+  
   useEffect(() => {
     onGroceryClick({ name, src, isMarked })
   }, [isMarked])
