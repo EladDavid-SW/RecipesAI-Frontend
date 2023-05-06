@@ -5,7 +5,8 @@ import axios from 'axios'
 import { Grid, Typography } from '@material-ui/core'
 import RecipePopup from '../Recipe/RecipePopup'
 
-const groceryList = ['mango', 'pineapple', 'apple', 'banana', 'tomato', 'beet', 'onion', 'orange', 'watermelon']
+// const groceryList = ['mango', 'pineapple', 'apple', 'banana', 'tomato', 'beet', 'onion', 'orange', 'watermelon', 'rise', 'eggplant', 'yogurt']
+const groceryList = ['pineapple', 'yogurt']
 const backendURL = process.env.REACT_APP_BACKEND_URL
 
 function GroceriesGrid(props) {
