@@ -3,7 +3,8 @@ import Grocery from '../Grocery/Grocery'
 import './Grid.css'
 import axios from 'axios'
 import { Grid, Typography } from '@material-ui/core'
-import RecipePopup from '../Recipe/RecipePopup'
+import RecipePopup from '../Recipe/Recipe'
+import Popup from '../Popup/Popup'
 
 // const groceryList = ['mango', 'pineapple', 'apple', 'banana', 'tomato', 'beet', 'onion', 'orange', 'watermelon', 'rise', 'eggplant', 'yogurt']
 const groceryList = ['pineapple', 'yogurt']
@@ -34,10 +35,6 @@ function GroceriesGrid(props) {
 
   async function handleMakeRecipe() {
     try {
-      if (markedGroceries.length === 0) {
-        alert('Please select groceries!')
-        return
-      }
       if (!showRecipe) setShowRecipe(true)
     } catch (error) {
       console.error(error)
@@ -69,10 +66,20 @@ function GroceriesGrid(props) {
         <button className='button' onClick={handleMakeRecipe}>
           Recipe Me!
         </button>
-        {showRecipe && <RecipePopup groceries={markedGroceries} onClose={() => setShowRecipe(false)} />}
+        <Popup show={showRecipe} onClose={() => setShowRecipe(false)}>
+          {/* <h2>please  me</h2> */}
+        {markedGroceries.length === 0 ? <h2>Select groceries first :)</h2> : <RecipePopup groceries={markedGroceries} onClose={() => setShowRecipe(false)} />}
+        </Popup>
       </div>
     </div>
   )
 }
 
 export default GroceriesGrid
+
+
+
+
+
+
+
