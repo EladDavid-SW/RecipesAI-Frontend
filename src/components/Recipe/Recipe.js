@@ -29,7 +29,9 @@ function Recipe({ groceries }) {
         setRecipeDetails(json)
 
         const responseDaliE = await axios.post(`${backendURL}/dali_e/`, {
-          prompts: [{prompt:json.title + 'in a minimal way, it should be a background', name:"name"}],
+          prompts: 
+          [{prompt:`bright warm white background with an image of ${json.title} `, name:"name"}],
+          // [{prompt:json.title + 'in a minimal way, it should be a background', name:"name"}],
         })
         console.log( responseDaliE.data);
         let image_url = responseDaliE.data.images[0]

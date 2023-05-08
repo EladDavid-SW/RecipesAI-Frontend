@@ -5,15 +5,40 @@ import axios from 'axios'
 import { Grid, Typography } from '@material-ui/core'
 import RecipePopup from '../Recipe/Recipe'
 import Popup from '../Popup/Popup'
+// import socket from '../../../sockets/index';
+import io from 'socket.io-client';
+
+
 
 // const groceryList = ['mango', 'pineapple', 'apple', 'banana', 'tomato', 'beet', 'onion', 'orange', 'watermelon', 'rise', 'eggplant', 'yogurt']
-const groceryList = ['pineapple', 'yogurt']
+const groceryList = ['pineapple', 'yogurt','melon','mango','kiwi']
 const backendURL = process.env.REACT_APP_BACKEND_URL
 
 function GroceriesGrid(props) {
   const [markedGroceries, setMarkedGroceries] = useState([])
   const [images, setImages] = useState([])
   const [showRecipe, setShowRecipe] = useState(false)
+
+  useEffect(() => {
+    const socket = io('http://localhost:3000');
+    socket.on('connect', () => {
+      console.log('Socket connected');
+    });
+    socket.on('disconnect', () => {
+      console.log('Socket disconnected');
+    });
+    socket.on('connect_error', (error) => {
+      console.log(`Socket connection error: ${error}`);
+    });
+    socket.on('greeting', (data) => {
+      alert(data); // prints "Hello, client!"
+    });
+  
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+  
 
   useEffect(() => {
     async function fetchImages() {
