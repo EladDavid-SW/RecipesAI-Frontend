@@ -5,11 +5,26 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  color: aqua;
+  color: white;
 }
 
+.popup-scroll-container {
+  max-height: 80vh;
+  overflow-y: scroll;
+}
+
+.popup-scroll-container::-webkit-scrollbar {
+  width: 10px;
+  background-color: rgb(40, 44, 52); /* Dark background color */
+}
+
+.popup-scroll-container::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color:rgb(117, 117, 117); /* Scrollbar thumb color */
+}
+  
 .popup-content {
-  background-color: rgb(165, 42, 42); /* Brown background color */
+  background-color: rgb(40, 44, 52); /* Dark background color */
   padding: 20px;
   border-radius: 4px;
   position: relative;

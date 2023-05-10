@@ -11,14 +11,16 @@ const Popup = ({ children, show, onClose }) => {
   return (
     <Grid container justifyContent='center' alignItems='center' className='popup'>
       <Grid item xs={11} sm={8} md={6}>
-        <Paper className='popup-content' sx={{ backgroundColor: 'rgb(194, 178, 128)' }}>
-          <Box display='flex' flexDirection='column' justifyContent='center' alignItems='center' minHeight='100%'>
-            <IconButton edge='end' color='inherit' onClick={onClose} aria-label='close' className='popup-close'>
-              <CloseIcon />
-            </IconButton>
-            {children}
-          </Box>
-        </Paper>
+        <div className='popup-scroll-container'>
+          <Paper className='popup-content' sx={{ backgroundColor: 'rgb(40, 44, 52)', color: 'white' }}>
+            <Box display='flex' flexDirection='column' justifyContent='center' alignItems='center' minHeight='100%'>
+              <IconButton edge='end' color='inherit' onClick={onClose} aria-label='close' className='popup-close'>
+                <CloseIcon />
+              </IconButton>
+              {children}
+            </Box>
+          </Paper>
+        </div>
       </Grid>
     </Grid>
   )
