@@ -1,51 +1,49 @@
 import React, { useState } from 'react';
 import { Grid, Typography, TextField, Button } from '@material-ui/core';
-import io from 'socket.io-client'
+import io from 'socket.io-client';
 import './AddGrocery.css';
 
 const AddGrocery = ({ onSubmit }) => {
   const [newGrocery, setNewGrocery] = useState('');
-  
-  function updateNewGrocery() {
-    console.log(newGrocery);
+
+  function uploadImage(imageUrl) {
     const socket = io('ws://localhost:3001', {
       transports: ['websocket', 'polling'],
-    })
+    });
 
     socket.on('connect', () => {
-      console.log('Socket connected:', socket.id)
+      console.log('Socket connected:', socket.id);
 
-      // Example: Send an image upload request
       const imageData = {
-        images: [newGrocery],
-      }
-      console.log(imageData)
+        images: [imageUrl],
+      };
+      console.log(imageData);
       socket.emit('uploadImage', imageData, (error) => {
         if (error) {
-          console.log('Error sending uploadImage event:', error)
+          console.log('Error sending uploadImage event:', error);
         }
-      })
-    })
+      });
+    });
 
     socket.on('disconnect', () => {
-      console.log('Socket disconnected')
-    })
+      console.log('Socket disconnected');
+    });
 
     socket.on('connect_error', (error) => {
-      console.log(`Socket connection error: ${error}`)
-    })
+      console.log(`Socket connection error: ${error}`);
+    });
 
     socket.on('greeting', (data) => {
-      console.log('Received greeting:', data)
-    })
+      console.log('Received greeting:', data);
+    });
 
     socket.on('newImage', (imageUrl) => {
-      console.log('Received new image URL:', imageUrl)
-    })
+      console.log('Received new image URL:', imageUrl);
+    });
 
     return () => {
-      socket.disconnect()
-    }
+      socket.disconnect();
+    };
   }
 
   function handleNewGroceryChange(event) {
@@ -56,7 +54,7 @@ const AddGrocery = ({ onSubmit }) => {
     const newGroceryItem = { name: newGrocery };
     console.log(newGroceryItem);
     setNewGrocery('');
-    updateNewGrocery();
+    uploadImage(newGrocery);
     onSubmit(false);
   }
 

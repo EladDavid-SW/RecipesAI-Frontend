@@ -1,13 +1,34 @@
 import { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 
-function useWebSocket(url) {
+function useWebSocket(url, onNewImageUrl) {
   const [socket, setSocket] = useState(null);
+  const [socketConnected, setSocketConnected] = useState(false);
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    const newSocket = io(url);
+    const newSocket = io(url, {
+      transports: ['websocket', 'polling'],
+    });
     setSocket(newSocket);
+
+    newSocket.on('connect', () => {
+      console.log('Socket connected');
+      
+      if (onNewImageUrl) {
+        newSocket.on('newImage', (imageUrl) => {
+          console.log('Received new image URL:', imageUrl);
+          onNewImageUrl(imageUrl);
+        });
+      }
+      
+      setSocketConnected(true);
+    });
+
+    newSocket.on('disconnect', () => {
+      console.log('Socket disconnected');
+      setSocketConnected(false);
+    });
 
     return () => newSocket.close();
   }, [url]);
@@ -21,13 +42,21 @@ function useWebSocket(url) {
       setMessages((prevMessages) => [...prevMessages, message]);
     });
 
+    socket.on('newImage', (imageUrl) => {
+      console.log('Received new image URL:', imageUrl);
+      if (onNewImageUrl) {
+        onNewImageUrl(imageUrl);
+      }
+    });
+
     return () => {
       socket.off('message');
+      socket.off('newImage');
     };
-  }, [socket]);
+  }, [socket, onNewImageUrl]);
 
   function sendMessage(message) {
-    if (socket) {
+    if (socketConnected) {
       socket.emit('message', message);
     }
   }
@@ -36,14 +65,3 @@ function useWebSocket(url) {
 }
 
 export default useWebSocket;
-
-
-
-// import useWebSocket from './useWebSocket';
-
-// function MyComponent() {
-//   const [messages, sendMessage] = useWebSocket('ws://localhost:3001');
-
-//   function handleSendMessage() {
-//     sendMessage('Hello, server!');
-//   }
