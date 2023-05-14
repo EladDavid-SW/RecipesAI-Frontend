@@ -5,9 +5,9 @@ import axios from 'axios'
 import { Grid, Typography, IconButton, TextField, Button } from '@material-ui/core'
 import RecipePopup from '../Recipe/Recipe'
 import Popup from '../Popup/Popup'
+import AddGrocery from '../AddGrocery/AddGrocery'
 import AddIcon from '@material-ui/icons/Add'
 
-// const groceryList = ['pineapple', 'yogurt', 'melon', 'mango', 'kiwi']
 const backendURL = process.env.REACT_APP_BACKEND_URL
 
 function GroceriesGrid(props) {
@@ -15,17 +15,15 @@ function GroceriesGrid(props) {
   const [images, setImages] = useState([])
   const [showRecipe, setShowRecipe] = useState(false)
   const [showAddGrocery, setShowAddGrocery] = useState(false)
-  const [newGrocery, setNewGrocery] = useState('')
-  const [groceryList, setGroceryList] = useState(['pineapple', 'yogurt', 'melon', 'mango', 'kiwi'])
 
   useEffect(() => {
     async function fetchImages() {
-      const response = await axios.post(`${backendURL}/images/`, { images: groceryList })
+      const response = await axios.get(`${backendURL}/image/`)
       let imagesList = response.data.images
       setImages(imagesList)
     }
     fetchImages()
-  }, [groceryList])
+  }, [])
 
   function handleGroceryClick(grocery) {
     if (grocery.isMarked) setMarkedGroceries([...markedGroceries, grocery])
@@ -37,28 +35,9 @@ function GroceriesGrid(props) {
   }
 
   async function handleMakeRecipe() {
-    try {
+   
       if (!showRecipe) setShowRecipe(true)
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  function handleAddGrocery() {
-    setShowAddGrocery(true)
-  }
-
-  function handleNewGroceryChange(event) {
-    setNewGrocery(event.target.value)
-  }
-
-  function handleNewGrocerySubmit() {
-    const newGroceryItem = { name: newGrocery }
-    setMarkedGroceries([...markedGroceries, newGroceryItem])
-    console.log(newGroceryItem)
-    setGroceryList([...groceryList, newGroceryItem.name])
-    setShowAddGrocery(false)
-    setNewGrocery('')
+  
   }
 
   return (
@@ -79,12 +58,12 @@ function GroceriesGrid(props) {
                 <Grocery src={image.url} name={image.name} onGroceryClick={handleGroceryClick} />
               </Grid>
             ))}
-            <Grid key={200} item xs={12} sm={6} md={4} lg={3} className='grid-item'>
+            {/* <Grid key={200} item xs={12} sm={6} md={4} lg={3} className='grid-item'>
               <Grocery src={'https://icon-library.com/images/white-plus-icon/white-plus-icon-3.jpg'} name={'plus'} onGroceryClick={handleAddGrocery} />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
+            </Grid> */}
+            <Grid key={-1} item xs={12} sm={6} md={4} lg={3}>
               <Grid container justifyContent='center'>
-                <IconButton style={{ color: 'white', fontSize: 800 }} onClick={handleAddGrocery}>
+                <IconButton style={{ color: 'white', fontSize: 800 }} onClick={() => setShowAddGrocery(true)}>
                   <AddIcon />
                 </IconButton>
               </Grid>
@@ -94,13 +73,7 @@ function GroceriesGrid(props) {
       </Grid>
 
       <Popup show={showAddGrocery} onClose={() => setShowAddGrocery(false)}>
-        <Typography variant='h5' sx={{ color: 'text.secondary', fontWeight: 'bold', marginBottom: '1rem' }}>
-          Add Grocery
-        </Typography>
-        <TextField label='Grocery Name' value={newGrocery} onChange={handleNewGroceryChange} sx={{ marginBottom: '1rem' }} />
-        <Button variant='contained' onClick={handleNewGrocerySubmit} sx={{ backgroundColor: 'green', color: 'white' }}>
-          Add
-        </Button>
+        <AddGrocery onSubmit={() => setShowAddGrocery(false)}></AddGrocery>
       </Popup>
 
       <div className='container'>
