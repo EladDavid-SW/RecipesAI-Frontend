@@ -1,67 +1,30 @@
-import { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 
-function useWebSocket(url, onNewImageUrl) {
-  const [socket, setSocket] = useState(null);
-  const [socketConnected, setSocketConnected] = useState(false);
-  const [messages, setMessages] = useState([]);
+const backendURL = process.env.REACT_APP_BACKEND_URL;
 
-  useEffect(() => {
-    const newSocket = io(url, {
-      transports: ['websocket', 'polling'],
-    });
-    setSocket(newSocket);
+const createSocket = (onNewImage) => {
+  const socket = io(backendURL, {
+    transports: ['websocket', 'polling'],
+  });
 
-    newSocket.on('connect', () => {
-      console.log('Socket connected');
-      
-      if (onNewImageUrl) {
-        newSocket.on('newImage', (imageUrl) => {
-          console.log('Received new image URL:', imageUrl);
-          onNewImageUrl(imageUrl);
-        });
-      }
-      
-      setSocketConnected(true);
-    });
+  socket.on('connect', () => {
+    console.log('Socket connected:', socket.id);
+  });
 
-    newSocket.on('disconnect', () => {
-      console.log('Socket disconnected');
-      setSocketConnected(false);
-    });
+  socket.on('disconnect', () => {
+    console.log('Socket disconnected');
+  });
 
-    return () => newSocket.close();
-  }, [url]);
+  socket.on('connect_error', (error) => {
+    console.log(`Socket connection error: ${error}`);
+  });
 
-  useEffect(() => {
-    if (!socket) {
-      return;
-    }
+  socket.on('newImage', (imageUrl) => {
+    console.log('Received new image URL:', imageUrl);
+    onNewImage(imageUrl);
+  });
 
-    socket.on('message', (message) => {
-      setMessages((prevMessages) => [...prevMessages, message]);
-    });
+  return socket;
+};
 
-    socket.on('newImage', (imageUrl) => {
-      console.log('Received new image URL:', imageUrl);
-      if (onNewImageUrl) {
-        onNewImageUrl(imageUrl);
-      }
-    });
-
-    return () => {
-      socket.off('message');
-      socket.off('newImage');
-    };
-  }, [socket, onNewImageUrl]);
-
-  function sendMessage(message) {
-    if (socketConnected) {
-      socket.emit('message', message);
-    }
-  }
-
-  return [messages, sendMessage];
-}
-
-export default useWebSocket;
+export default createSocket;

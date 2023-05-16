@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react'
 import Grocery from '../Grocery/Grocery'
 import './Grid.css'
@@ -7,18 +8,32 @@ import RecipePopup from '../Recipe/Recipe'
 import Popup from '../Popup/Popup'
 import AddGrocery from '../AddGrocery/AddGrocery'
 import AddIcon from '@material-ui/icons/Add'
-import useWebSocket from '../../services/sockets'
+import createSocket from '../../services/sockets';
 
-const backendURL = process.env.REACT_APP_BACKEND_URL
-const socketURL = 'ws://localhost:3001'
+const backendURL = process.env.REACT_APP_BACKEND_URL;
 
 function GroceriesGrid(props) {
-  const [markedGroceries, setMarkedGroceries] = useState([])
-  const [images, setImages] = useState([])
-  const [showRecipe, setShowRecipe] = useState(false)
-  const [showAddGrocery, setShowAddGrocery] = useState(false)
+  const [markedGroceries, setMarkedGroceries] = useState([]);
+  const [images, setImages] = useState([]);
+  const [showRecipe, setShowRecipe] = useState(false);
+  const [showAddGrocery, setShowAddGrocery] = useState(false);
+  const [newImageURL, setNewImageURL] = useState(null);
 
-  const [messages, sendMessage] = useWebSocket(socketURL, handleNewImageUrl)
+  useEffect(() => {
+    const socket = createSocket((imageUrl) => {
+      setNewImageURL(imageUrl);
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (newImageURL) {
+      setImages((prevImages) => [...prevImages, { url: newImageURL }]);
+    }
+  }, [newImageURL]);
 
   useEffect(() => {
     async function fetchImages() {
@@ -27,12 +42,7 @@ function GroceriesGrid(props) {
       setImages(imagesList)
     }
     fetchImages()
-  }, [])
-
-  function handleNewImageUrl(imageUrl) {
-    console.log('Received new image URL:', imageUrl)
-    // Do something with the new image URL, e.g., update state or perform an action
-  }
+  }, [images])
 
   function handleGroceryClick(grocery) {
     if (grocery.isMarked) setMarkedGroceries([...markedGroceries, grocery])
@@ -44,7 +54,9 @@ function GroceriesGrid(props) {
   }
 
   async function handleMakeRecipe() {
-    if (!showRecipe) setShowRecipe(true)
+   
+      if (!showRecipe) setShowRecipe(true)
+  
   }
 
   return (
@@ -78,6 +90,7 @@ function GroceriesGrid(props) {
           </Grid>
         </Grid>
       </Grid>
+
       <Popup show={showAddGrocery} onClose={() => setShowAddGrocery(false)}>
         <AddGrocery onSubmit={() => setShowAddGrocery(false)}></AddGrocery>
       </Popup>
@@ -95,3 +108,4 @@ function GroceriesGrid(props) {
 }
 
 export default GroceriesGrid
+
