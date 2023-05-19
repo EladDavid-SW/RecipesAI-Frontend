@@ -4,9 +4,10 @@ import './Grocery.css'
 function Grocery({ name, src, onGroceryClick }) {
   const [isMarked, setIsMarked] = useState(false)
 
-  async function handleClick() {
-    await setIsMarked(!isMarked)
+  function handleClick() {
+    setIsMarked(!isMarked)
   }
+  
   
   useEffect(() => {
     onGroceryClick({ name, src, isMarked })
