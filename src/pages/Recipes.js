@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import GroceriesGrid from '../components/Grid/GroceriesGrid'
+import { Grid } from '@mui/material'
 
 const Recipes = () => {
   return (
-    <GroceriesGrid></GroceriesGrid>
+    <Grid container sx={{ height: '100vh' }}>
+    <GroceriesGrid />
+    </Grid>
   );
 };
 
