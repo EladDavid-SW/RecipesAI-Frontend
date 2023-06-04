@@ -51,17 +51,39 @@ function GroceriesGrid(props) {
   }
 
   return (
-    <div>
+    <Grid container  justify="center">
       <Grid container spacing={2} justifyContent='center'>
-        <Grid item xs={12}>
-          <Grid container justifyContent='center'>
-            <Typography variant='h4' sx={{ color: 'text.secondary', fontWeight: 'bold', marginBottom: '1rem', fontFamily: 'Helvetica Neue, sans-serif' }}>
-              Delicious Recipes
-            </Typography>
-          </Grid>
-        </Grid>
 
+        
         <Grid item xs={12}>
+  <Grid container justifyContent='center' spacing={2}>
+   
+      <h1 style={{
+        color: '#f0f0f0',
+        fontWeight: 'bold',
+        fontFamily: 'Courier New, monospace',
+        textAlign: 'center',
+        textShadow: '2px 2px 8px rgba(0, 0, 0, 0.5)',
+        textTransform: 'uppercase',
+        letterSpacing: '2px'
+      }}>
+        Delicious Recipes
+      </h1>
+   
+      <Grid item xs={12}>
+  <Grid container justifyContent="center">
+    <button style={{ backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }} onClick={() => setShowAddGrocery(true)}>
+      <AddIcon style={{ color: '#4CAF50', fontSize: 150 }}/>
+    </button>
+  </Grid>
+</Grid>
+
+
+
+  </Grid>
+</Grid>
+
+      <Grid item xs={12}>
           <Grid container justifyContent='center'>
             {images.map((image, index) => (
               <Grid key={index} item xs={12} sm={6} md={4} lg={3} className='grid-item'>
@@ -71,13 +93,7 @@ function GroceriesGrid(props) {
             {/* <Grid key={200} item xs={12} sm={6} md={4} lg={3} className='grid-item'>
               <Grocery src={'https://icon-library.com/images/white-plus-icon/white-plus-icon-3.jpg'} name={'plus'} onGroceryClick={handleAddGrocery} />
             </Grid> */}
-            <Grid key={-1} item xs={12} sm={6} md={4} lg={3}>
-              <Grid container justifyContent='center'>
-                <IconButton style={{ color: 'white', fontSize: 800 }} onClick={() => setShowAddGrocery(true)}>
-                  <AddIcon />
-                </IconButton>
-              </Grid>
-            </Grid>
+  
           </Grid>
         </Grid>
       </Grid>
@@ -94,7 +110,7 @@ function GroceriesGrid(props) {
           {markedGroceries.length === 0 ? <h2>Select groceries first :)</h2> : <RecipePopup groceries={markedGroceries} onClose={() => setShowRecipe(false)} />}
         </Popup>
       </div>
-    </div>
+    </Grid>
   )
 }
 
