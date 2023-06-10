@@ -47,7 +47,7 @@ const Footer = () => {
       </Grid>
       <Grid item xs={12} sm={4} container justifyContent='center'>
         <Grid item xs={6} container direction='column' alignItems='center'>
-          <Typography variant='h5' gutterBottom>
+          <Typography variant='h5' gutterBottom sx={{ marginTop: theme.spacing(4) }}>
             Follow Us
           </Typography>
           <Grid container justifyContent='center'>
@@ -63,7 +63,7 @@ const Footer = () => {
           </Grid>
         </Grid>
         <Grid item xs={6} container direction='column' alignItems='center'>
-          <Typography variant='h5' gutterBottom>
+          <Typography variant='h5' gutterBottom sx={{ marginTop: theme.spacing(4) }}> 
             Contact Us
           </Typography>
           <IconButton sx={{ color: theme.palette.success.main }}>

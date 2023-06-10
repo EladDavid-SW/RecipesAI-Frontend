@@ -1,8 +1,8 @@
 import React from 'react'
-import { Box, Typography, Button, Grid } from '@mui/material'
+import { Box, Typography, Button } from '@mui/material'
+import recipeImage from '../../images/recipe.png'
 import theme from '../../services/theme'
 import { Link } from 'react-router-dom'
-import recipeImage from '../../images/recipe.png'
 
 const AboutUs = () => {
   return (
@@ -25,6 +25,7 @@ const AboutUs = () => {
           backgroundColor: theme.palette.info.main,
           borderRadius: 1,
           maxWidth: '40%',
+          textAlign: 'left', // Align the text to the left
         }}
       >
         <Typography variant='h4' component='h1' gutterBottom sx={{ color: theme.palette.secondary.main }}>
@@ -38,7 +39,20 @@ const AboutUs = () => {
           Our mission is to inspire and empower people to make creative and healthy meals using ingredients they already have. With FlavorIt, you can turn everyday groceries into amazing dishes and
           contribute to a more sustainable world.
         </Typography>
-        <Button component={Link} to='/recipe' variant='contained' sx={{ backgroundColor: theme.palette.success.main, color: theme.palette.secondary.main }}>
+        <Button
+          component={Link}
+          to='/recipe'
+          variant='contained'
+          sx={{
+            backgroundColor: theme.palette.success.main,
+            color: theme.palette.secondary.main,
+            '&:hover': {
+              backgroundColor: theme.palette.success.dark,
+            },
+            marginTop: '1rem',
+            width: '100%',
+          }}
+        >
           Get Started
         </Button>
       </Box>
