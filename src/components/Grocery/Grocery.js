@@ -7,15 +7,17 @@ function Grocery({ name, src, onGroceryClick }) {
   function handleClick() {
     setIsMarked(!isMarked)
   }
-  
-  
+
   useEffect(() => {
     onGroceryClick({ name, src, isMarked })
   }, [isMarked])
 
   return (
     <div onClick={handleClick} className='grocery-container'>
-      <img src={src} className={`grocery-item ${isMarked ? 'marked-grocery' : ''}`}/>
+      <div className={`grocery-item ${isMarked ? 'marked-grocery' : ''}`}>
+        <img src={src} alt={name} style={{ width: '100%', height: '100%' }} />
+        <div className="hover-text">{name.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</div>
+      </div>
     </div>
   )
 }

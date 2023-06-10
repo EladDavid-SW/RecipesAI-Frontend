@@ -5,7 +5,7 @@ import theme from '../../services/theme'
 
 const Footer = () => {
   return (
-    <Grid container sx={{ backgroundColor: theme.palette.info.main, color: theme.palette.secondary.main, padding: '2rem' }}>
+    <Grid container sx={{ backgroundColor: theme.palette.info.main, color: theme.palette.secondary.main, padding: '2rem', paddingBottom: 0}}>
       <Grid item xs={12} sm={4}>
         <Typography variant='h3' component='div' sx={{ fontWeight: 'bold', fontFamily: 'Roboto Condensed', margin: theme.spacing(2) }}>
           FlavorIt
@@ -30,30 +30,43 @@ const Footer = () => {
           }}
           sx={{ width: '60%' }}
         />
-        <Button variant='contained' sx={{ backgroundColor: theme.palette.success.main, color: theme.palette.secondary.main, width: '60%', margin: '2%' }}>
+        <Button
+          variant='contained'
+          sx={{
+            backgroundColor: theme.palette.success.main,
+            color: theme.palette.secondary.main,
+            width: '60%',
+            margin: '2%',
+            '&:hover': {
+              backgroundColor: theme.palette.success.dark,
+            },
+          }}
+        >
           Subscribe
         </Button>
       </Grid>
-      <Grid item xs={12} sm={4} container>
+      <Grid item xs={12} sm={4} container justifyContent='center'>
         <Grid item xs={6} container direction='column' alignItems='center'>
           <Typography variant='h5' gutterBottom>
             Follow Us
           </Typography>
-          <IconButton sx={{ color: theme.palette.secondary.main }}>
-            <Facebook />
-          </IconButton>
-          <IconButton sx={{ color: theme.palette.secondary.main }}>
-            <Twitter />
-          </IconButton>
-          <IconButton sx={{ color: theme.palette.secondary.main }}>
-            <Instagram />
-          </IconButton>
+          <Grid container justifyContent='center'>
+            <IconButton sx={{ color: theme.palette.text.primary }}>
+              <Facebook />
+            </IconButton>
+            <IconButton sx={{ color: theme.palette.text.primary }}>
+              <Twitter />
+            </IconButton>
+            <IconButton sx={{ color: theme.palette.text.primary }}>
+              <Instagram />
+            </IconButton>
+          </Grid>
         </Grid>
         <Grid item xs={6} container direction='column' alignItems='center'>
           <Typography variant='h5' gutterBottom>
             Contact Us
           </Typography>
-          <IconButton sx={{ color: theme.palette.secondary.main }}>
+          <IconButton sx={{ color: theme.palette.success.main }}>
             <Phone />
           </IconButton>
           <Typography variant='body1'>+972-528-642-364</Typography>

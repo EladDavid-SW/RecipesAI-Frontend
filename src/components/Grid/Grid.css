@@ -20,6 +20,7 @@ body {
   font-size: 20px;
   cursor: pointer;
   margin: 3%;
+  width:100%;
 }
 
 .button:hover {
@@ -99,3 +100,6 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+
+

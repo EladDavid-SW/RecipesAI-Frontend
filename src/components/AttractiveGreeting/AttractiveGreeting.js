@@ -31,9 +31,22 @@ const AttractiveGreeting = () => {
           Create Your Own Recipe
         </Typography>
         <Typography variant='body1' gutterBottom sx={{ color: theme.palette.secondary.main }}>
-          Have a list of groceries and don't know what to make? Start creating your own recipe now and discover amazing meals you can prepare!
+          Have a list of groceries and don't know what to make? <br/>Start creating your own recipe now and discover amazing meals you can prepare!
         </Typography>
-        <Button component={Link} to='/recipe' variant='contained' sx={{ backgroundColor: theme.palette.success.main, color: theme.palette.secondary.main }}>
+        <Button
+          component={Link}
+          to='/recipe'
+          variant='contained'
+          sx={{
+            backgroundColor: theme.palette.success.main,
+            color: theme.palette.secondary.main,
+            '&:hover': {
+              backgroundColor: theme.palette.success.dark,
+            },
+            marginTop: '1rem', // Change the top margin to adjust the button's vertical position
+            width: '100%', // Set the button's width to occupy the full width of its container
+          }}
+        >
           Get Started
         </Button>
       </Box>
