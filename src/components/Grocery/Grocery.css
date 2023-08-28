@@ -37,3 +37,9 @@
   opacity: 1;
 }
 
+.grocery-close{
+  position: absolute;
+  top: 0.7%;
+  left: 80%;
+  color: #7a6767;
+}

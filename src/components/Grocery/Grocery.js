@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './Grocery.css'
+import CloseIcon from '@mui/icons-material/Close'
+import { Grid, IconButton } from '@mui/material'
 
 function Grocery({ name, src, onGroceryClick, onDelete }) {
   const [isMarked, setIsMarked] = useState(false)
@@ -9,7 +11,8 @@ function Grocery({ name, src, onGroceryClick, onDelete }) {
   }
 
   function handleDelete(event) {
-    onDelete(name) // Pass the image name to the onDelete function
+    event.stopPropagation()
+    onDelete(name)
   }
 
   useEffect(() => {
@@ -17,16 +20,16 @@ function Grocery({ name, src, onGroceryClick, onDelete }) {
   }, [isMarked])
 
   return (
-    <div onClick={handleClick} className='grocery-container'>
-      <div className={`grocery-item ${isMarked ? 'marked-grocery' : ''}`}>
+    <Grid onClick={handleClick} className='grocery-container'>
+      <Grid className={`grocery-item ${isMarked ? 'marked-grocery' : ''}`}>
         <img src={src} alt={name} style={{ width: '100%', height: '100%' }} />
-        <div className='hover-text'>{name.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())}</div>
-        <button className='delete-button' onClick={handleDelete}>
-          Delete
-        </button>
-      </div>
-    </div>
-  );
+        <Grid className='hover-text'>{name.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())}</Grid>
+        <IconButton edge='end' onClick={handleDelete} aria-label='close' className='grocery-close' size='large'>
+          <CloseIcon />
+        </IconButton>
+      </Grid>
+    </Grid>
+  )
 }
 
 export default Grocery

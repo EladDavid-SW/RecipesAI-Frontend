@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import GroceriesGrid from '../components/Grid/GroceriesGrid'
 import { Grid } from '@mui/material'
 

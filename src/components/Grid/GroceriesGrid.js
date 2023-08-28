@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Grocery from '../Grocery/Grocery'
 import './Grid.css'
 import axios from 'axios'
-import { Grid, Typography, IconButton, TextField, Button } from '@mui/material'
+import { Grid } from '@mui/material'
 import RecipePopup from '../Recipe/Recipe'
 import Popup from '../Popup/Popup'
 import AddGrocery from '../AddGrocery/AddGrocery'
@@ -16,20 +16,18 @@ function GroceriesGrid(props) {
   const [images, setImages] = useState([])
   const [showRecipe, setShowRecipe] = useState(false)
   const [showAddGrocery, setShowAddGrocery] = useState(false)
-  const [socket, setSocket] = useState(null);
-
+  const [socket, setSocket] = useState(null)
 
   useEffect(() => {
     const newSocket = createSocket((image) => {
-      setImages((prevImages) => [...prevImages, image[0]]);
-    });
-    setSocket(newSocket);
-  
+      setImages((prevImages) => [...prevImages, image[0]])
+    })
+    setSocket(newSocket)
+
     return () => {
-      newSocket.disconnect();
-    };
-  }, []);
-  
+      newSocket.disconnect()
+    }
+  }, [])
 
   useEffect(() => {
     async function fetchImages() {
@@ -54,10 +52,11 @@ function GroceriesGrid(props) {
   }
 
   const handleDeleteImage = (imageName) => {
+    console.log('delete')
     if (socket) {
-      socket.emit('deleteImage', imageName);
+      socket.emit('deleteImage', imageName)
     }
-  };  
+  }
 
   return (
     <Grid container justifyContent='center'>
@@ -93,12 +92,7 @@ function GroceriesGrid(props) {
           <Grid container justifyContent='center'>
             {images.map((image, index) => (
               <Grid key={index} item xs={12} sm={6} md={4} lg={3} className='grid-item'>
-                <Grocery
-                  src={image.url}
-                  name={image.name}
-                  onGroceryClick={handleGroceryClick}
-                  onDelete={handleDeleteImage}
-                />
+                <Grocery src={image.url} name={image.name} onGroceryClick={handleGroceryClick} onDelete={handleDeleteImage} />
               </Grid>
             ))}
           </Grid>
@@ -132,7 +126,7 @@ function GroceriesGrid(props) {
         </Grid>
       </Grid>
     </Grid>
-  );
+  )
 }
 
 export default GroceriesGrid

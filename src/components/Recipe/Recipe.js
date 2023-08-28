@@ -14,26 +14,24 @@ function Recipe({ groceries }) {
 
   useEffect(() => {
     async function fetchRecipe() {
-      const ingredients = groceries.map((grocery) => grocery.name).join(', ')
-      const response = await axios.post(`${backendURL}/chatGPT`, {
-        message:
-          `make me a recipe from this ingredients: ` +
-          ingredients +
-          `.  give me the answer in json format:{"title": "", "ingredients": ["",""], "instructions": ["",""]} and make sure to not add Bad control character for js json parser in the string literal`,
-      })
-
       try {
+        const ingredients = groceries.map((grocery) => grocery.name).join(', ')
+        const response = await axios.post(`${backendURL}/chatGPT`, {
+          message:
+            `make me a recipe from this ingredients: ` +
+            ingredients +
+            `.  give me the answer in json format:{"title": "", "ingredients": ["",""], "instructions": ["",""]} and make sure to not add Bad control character for js json parser in the string literal`,
+        })
+
         console.log(response.data.message)
         let json = JSON.parse(response.data.message)
         console.log(json)
         setRecipeDetails(json)
 
         const responseDaliE = await axios.post(`${backendURL}/dali_e/`, {
-          prompts: 
-          [{prompt:`bright warm white background with an image of ${json.title} `, name:"name"}],
-          // [{prompt:json.title + 'in a minimal way, it should be a background', name:"name"}],
+          prompts: [{ prompt: `bright warm white background with an image of ${json.title} `, name: 'name' }],
         })
-        console.log( responseDaliE.data);
+        console.log(responseDaliE.data)
         let image_url = responseDaliE.data.images[0]
         setImage(image_url.url)
         console.log(image_url.url)
@@ -52,13 +50,15 @@ function Recipe({ groceries }) {
       fetchRecipe()
       isRecipe = true
     }
-  }, [groceries])
+  }, [])
 
   return (
-    <div>
-      <Grid container justifyContent="center" alignItems="center">
-        {recipeDetails !== null && imageLoaded ? (
-          <>
+    <Grid container justifyContent='center' alignItems='center'>
+      {recipeDetails === null ? (
+        <CircularProgress />
+      ) : (
+        <Grid item xs={12}>
+          <Grid container spacing={3} alignItems='center'>
             <Grid item xs={12} md={6}>
               <h1>{recipeDetails.title}</h1>
               <h2>Ingredients:</h2>
@@ -67,17 +67,17 @@ function Recipe({ groceries }) {
               <p style={{ whiteSpace: 'pre-line' }}>{recipeDetails.instructions.join('\n')}</p>
             </Grid>
             <Grid item xs={12} md={6}>
-              <img src={image} alt="Recipe" style={{ width: '100%', height: 'auto' }} />
+              {imageLoaded ? (
+                <img src={image} alt='Recipe' style={{ width: '100%', height: '100%' }} />
+              ) : (
+                <img src={'https://media.tenor.com/n1GNGQYlVJ8AAAAi/kakaotalk-emoticon.gif'} alt='Recipe' style={{ width: '100%', height: '100%' }} />
+              )}
             </Grid>
-          </>
-        ) : (
-          <Grid item xs={12}>
-            <CircularProgress />
           </Grid>
-        )}
-      </Grid>
-    </div>
-  );
+        </Grid>
+      )}
+    </Grid>
+  )
 }
 
-export default Recipe;
+export default Recipe
