@@ -51,13 +51,13 @@ const Footer = () => {
             Follow Us
           </Typography>
           <Grid container justifyContent='center'>
-            <IconButton sx={{ color: theme.palette.text.primary }}>
+            <IconButton sx={{ color: theme.palette.text.primary }} size="large">
               <Facebook />
             </IconButton>
-            <IconButton sx={{ color: theme.palette.text.primary }}>
+            <IconButton sx={{ color: theme.palette.text.primary }} size="large">
               <Twitter />
             </IconButton>
-            <IconButton sx={{ color: theme.palette.text.primary }}>
+            <IconButton sx={{ color: theme.palette.text.primary }} size="large">
               <Instagram />
             </IconButton>
           </Grid>
@@ -66,14 +66,14 @@ const Footer = () => {
           <Typography variant='h5' gutterBottom sx={{ marginTop: theme.spacing(4) }}> 
             Contact Us
           </Typography>
-          <IconButton sx={{ color: theme.palette.success.main }}>
+          <IconButton sx={{ color: theme.palette.success.main }} size="large">
             <Phone />
           </IconButton>
           <Typography variant='body1'>+972-528-642-364</Typography>
         </Grid>
       </Grid>
     </Grid>
-  )
+  );
 }
 
 export default Footer

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Grid, Typography, TextField, Button } from '@material-ui/core'
+import { Grid, Typography, TextField, Button } from '@mui/material'
 import io from 'socket.io-client'
 import './AddGrocery.css'
 

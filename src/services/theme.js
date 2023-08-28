@@ -1,6 +1,6 @@
-import { createTheme } from '@mui/material/styles'
+import { createTheme, adaptV4Theme } from '@mui/material/styles';
 
-const theme = createTheme({
+const theme = createTheme(adaptV4Theme({
   palette: {
     mode: 'dark',
     primary: {
@@ -16,6 +16,6 @@ const theme = createTheme({
       main: '#4caf50',
     },
   },
-})
+}))
 
 export default theme;

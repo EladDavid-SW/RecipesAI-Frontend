@@ -14,7 +14,13 @@ const Popup = ({ children, show, onClose }) => {
         <div className='popup-scroll-container'>
           <Paper className='popup-content' sx={{ backgroundColor: 'rgb(40, 44, 52)', color: 'white' }}>
             <Box display='flex' flexDirection='column' justifyContent='center' alignItems='center' minHeight='100%'>
-              <IconButton edge='end' color='inherit' onClick={onClose} aria-label='close' className='popup-close'>
+              <IconButton
+                edge='end'
+                color='inherit'
+                onClick={onClose}
+                aria-label='close'
+                className='popup-close'
+                size="large">
                 <CloseIcon />
               </IconButton>
               {children}
@@ -23,7 +29,7 @@ const Popup = ({ children, show, onClose }) => {
         </div>
       </Grid>
     </Grid>
-  )
+  );
 }
 
 export default Popup
