@@ -17,7 +17,7 @@ function Grocery({ name, src, onGroceryClick, onDelete }) {
 
   useEffect(() => {
     onGroceryClick({ name, src, isMarked })
-  }, [isMarked])
+  }, [isMarked, name, src])
 
   return (
     <Grid onClick={handleClick} className='grocery-container'>

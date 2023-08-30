@@ -6,8 +6,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 const backendURL = process.env.REACT_APP_BACKEND_URL
 
 function Recipe({ groceries }) {
-  let isRecipe = false
-
+  const [isRecipeFetched, setIsRecipeFetched] = useState(false)
   const [recipeDetails, setRecipeDetails] = useState(null)
   const [image, setImage] = useState('')
   const [imageLoaded, setImageLoaded] = useState(false)
@@ -36,6 +35,7 @@ function Recipe({ groceries }) {
         setImage(image_url.url)
         console.log(image_url.url)
         setImageLoaded(true)
+        setIsRecipeFetched(true)
       } catch (error) {
         console.error('Error:', error)
         if (error.message.includes('JSON')) {
@@ -45,10 +45,8 @@ function Recipe({ groceries }) {
         }
       }
     }
-
-    if (!isRecipe) {
+    if (!isRecipeFetched) {
       fetchRecipe()
-      isRecipe = true
     }
   }, [])
 
