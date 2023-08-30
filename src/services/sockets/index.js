@@ -2,7 +2,7 @@ import io from 'socket.io-client';
 
 const backendURL = process.env.REACT_APP_BACKEND_URL;
 
-const createSocket = (onNewImage) => {
+const createSocket = (onNewImage, removeImage) => {
   const socket = io(backendURL, {
     transports: ['websocket', 'polling'],
   });
@@ -20,8 +20,13 @@ const createSocket = (onNewImage) => {
   });
 
   socket.on('newImage', (imageUrl) => {
-    console.log('Received new image URL:', imageUrl);
     onNewImage(imageUrl);
+    console.log('Received new image URL:', imageUrl);
+  });
+
+  socket.on('imageRemoved', (imageUrl) => {
+    removeImage(imageUrl);
+    console.log('Remove image URL:', imageUrl);
   });
 
   return socket;

@@ -19,9 +19,14 @@ function GroceriesGrid(props) {
   const [socket, setSocket] = useState(null)
 
   useEffect(() => {
-    const newSocket = createSocket((image) => {
-      setImages((prevImages) => [...prevImages, image[0]])
-    })
+    const newSocket = createSocket(
+      (image) => {
+        setImages((prevImages) => [...prevImages, image[0]])
+      },
+      (imageToRemove) => {
+        setImages((prevImages) => prevImages.filter((image) => image.url !== imageToRemove))
+      }
+    )
     setSocket(newSocket)
 
     return () => {
@@ -53,8 +58,6 @@ function GroceriesGrid(props) {
 
   const handleDeleteImage = (imageName) => {
     console.log('delete')
-    console.log(socket);
-    console.log(socket.connected === true);
     if (socket.connected) {
       socket.emit('deleteImage', imageName)
     }
