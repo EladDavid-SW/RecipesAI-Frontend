@@ -53,7 +53,9 @@ function GroceriesGrid(props) {
 
   const handleDeleteImage = (imageName) => {
     console.log('delete')
-    if (socket) {
+    console.log(socket);
+    console.log(socket.connected === true);
+    if (socket.connected) {
       socket.emit('deleteImage', imageName)
     }
   }

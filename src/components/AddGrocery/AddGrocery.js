@@ -3,11 +3,13 @@ import { Grid, Typography, TextField, Button } from '@mui/material'
 import io from 'socket.io-client'
 import './AddGrocery.css'
 
+const backendURL = process.env.REACT_APP_BACKEND_URL;
+
 const AddGrocery = ({ onSubmit }) => {
   const [newGrocery, setNewGrocery] = useState('')
 
   function uploadImage(imageUrl) {
-    const socket = io('ws://localhost:3001', {
+    const socket = io(backendURL, {
       transports: ['websocket', 'polling'],
     })
 
