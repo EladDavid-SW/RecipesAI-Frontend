@@ -17,7 +17,8 @@ function Grocery({ name, src, onGroceryClick, onDelete }) {
 
   useEffect(() => {
     onGroceryClick({ name, src, isMarked })
-  }, [isMarked, name, src])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMarked])
 
   return (
     <Grid onClick={handleClick} className='grocery-container'>
