@@ -3,7 +3,7 @@ import Grocery from '../Grocery/Grocery'
 import './Grid.css'
 import axios from 'axios'
 import { Grid } from '@mui/material'
-import RecipePopup from '../Recipe/Recipe'
+import RecipeContent from '../Recipe/Recipe'
 import Popup from '../Popup/Popup'
 import AddGrocery from '../AddGrocery/AddGrocery'
 import AddIcon from '@mui/icons-material/Add'
@@ -17,6 +17,7 @@ function GroceriesGrid(props) {
   const [showRecipe, setShowRecipe] = useState(false)
   const [showAddGrocery, setShowAddGrocery] = useState(false)
   const [socket, setSocket] = useState(null)
+
 
   useEffect(() => {
     const newSocket = createSocket(
@@ -58,7 +59,7 @@ function GroceriesGrid(props) {
 
   const handleDeleteImage = (imageName) => {
     console.log('delete')
-    if (socket.connected) {
+    if (socket.connected ) {
       socket.emit('deleteImage', imageName)
     }
   }
@@ -126,7 +127,7 @@ function GroceriesGrid(props) {
             </button>
           </Grid>
           <Popup show={showRecipe} onClose={() => setShowRecipe(false)}>
-            {markedGroceries.length === 0 ? <h2>Select groceries first :)</h2> : <RecipePopup groceries={markedGroceries} onClose={() => setShowRecipe(false)} />}
+            {markedGroceries.length === 0 ? <h2>Select groceries first :)</h2> : <RecipeContent groceries={markedGroceries} onClose={() => setShowRecipe(false)} />}
           </Popup>
         </Grid>
       </Grid>

@@ -46,7 +46,7 @@ body {
   background-color: transparent;
   box-shadow: none;
   border-radius: 5px;
-  transition: transform 0.3s ease; /* Add transition */
+  transition: transform 0.3s ease; 
 }
 
 /* Add hover effect for grid-item */
