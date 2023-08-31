@@ -19,6 +19,7 @@ function Grocery({ name, src, onGroceryClick, onDelete }) {
       setDeleteIsConfirmed(false)
       console.log('Delete Me from Grocery')
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [deleteIsConfirmed])
 
   function handleDelete(event) {
@@ -33,6 +34,7 @@ function Grocery({ name, src, onGroceryClick, onDelete }) {
 
   useEffect(() => {
     onGroceryClick({ name, src, isMarked })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMarked])
 
   return (
