@@ -1,8 +1,6 @@
 # RecipesAI-Frontend
 
-<div align="center">
-  <img src="https://recipes-elad-project.s3.us-west-2.amazonaws.com/GithubReadme.png" alt="Recipe Example" width="600">
-</div>
+![Recipe Example](https://recipes-elad-project.s3.us-west-2.amazonaws.com/GithubReadme.png)
 
 ---
 
@@ -11,31 +9,22 @@
 - [Introduction](#introduction)
 - [Live Demo](#live-demo)
 - [Screenshot](#screenshot)
+- [Real-Time Grocery Management](#real-time-grocery-management)
 - [Getting Started](#getting-started)
-- [License](#license)
 - [Contact](#contact)
 
 ---
 
 ## Introduction
 
-Welcome to the RecipesAI-Frontend repository! This is the frontend component of the RecipesAI project, thoughtfully crafted using React and Material-UI (MUI). If you're an employer or interviewer, you'll find this README a comprehensive guide to the project's features and functionalities.
+Welcome to the RecipesAI-Frontend repository! This is the frontend component of the RecipesAI project, implemented using React and Material-UI (MUI).
 
 **Project Highlights:**
 
 - Interactive selection of groceries.
 - Recipe generation using ChatGPT.
 - Dynamic image generation with DALL·E.
-
-### How to Use
-
-To leverage the full potential of the RecipesAI-Frontend, follow these simple steps:
-
-1. **Select Groceries**: Choose the ingredients you have from the provided list.
-2. **Add More**: Click the 'Add' button to include additional groceries.
-3. **Generate Recipe**: Once your selection is ready, scroll down and click the 'Recipe Me' button.
-
-The application will seamlessly generate a delectable recipe using ChatGPT and present it alongside a dynamically created image from DALL·E.
+- Real-time grocery management with WebSocket support.
 
 ---
 
@@ -51,17 +40,53 @@ Experience the project in action by visiting the live demo:
 
 Here's a glimpse of what the RecipesAI-Frontend looks like:
 
-<div align="center">
-  <img src="https://recipes-elad-project.s3.us-west-2.amazonaws.com/GithubReadme.png" alt="Recipe Example" width="600">
-</div>
+![Recipe Example](https://recipes-elad-project.s3.us-west-2.amazonaws.com/GithubReadme.png)
+
+---
+
+## Real-Time Grocery Management
+
+One of the remarkable features of RecipesAI-Frontend is its real-time grocery management system. By leveraging WebSocket technology, you can create and delete groceries seamlessly across multiple tabs or devices without the need for refreshing the page. It's a collaborative culinary experience like no other!
 
 ---
 
 ## Getting Started
 
-If you'd like to run this project locally for further exploration or development, follow these straightforward steps:
+To set up and run this project, follow these steps:
 
-1. **Clone the Repository**:
+1. **Clone the Repository:**
 
-   ```bash
-   git clone https://github.com/your-username/RecipesAI-Frontend.git
+```bash
+git clone https://github.com/your-username/RecipesAI-Frontend.git
+```
+
+
+2. **Install Dependencies:**
+
+```bash
+npm install
+```
+
+3. **Start the Development Server:**
+
+```bash
+npm start
+```
+
+Now you're ready to delve into the code and enhance the RecipesAI-Frontend to your heart's content.
+
+## Contact
+If you have any questions, suggestions, or simply want to connect, don't hesitate to reach out to the project's creator:
+
+- **Name**: Elad
+- **Email**: elad.david5@gmail.com
+
+Your feedback and collaboration are greatly appreciated.
+
+Thank you for exploring the RecipesAI-Frontend repository. Enjoy experimenting with the culinary magic it brings to life!
+
+
+
+
+
+
