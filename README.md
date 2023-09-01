@@ -3,7 +3,6 @@
 [Visit the RecipesAI-Frontend Website](https://elad-ai-recipes.netlify.app/recipe)
 
 ![Recipe Example](https://recipes-elad-project.s3.us-west-2.amazonaws.com/GithubReadme.png)
-<img src="https://recipes-elad-project.s3.us-west-2.amazonaws.com/GithubReadme.png" alt="Recipe Example" width="1000" height="500">
 
 ---
 
