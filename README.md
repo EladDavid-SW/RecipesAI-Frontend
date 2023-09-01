@@ -50,7 +50,7 @@ Here's a glimpse of what the RecipesAI-Frontend looks like:
 
 ## Real-Time Grocery Management
 
-One of the remarkable features of RecipesAI-Frontend is its real-time grocery management system. By leveraging WebSocket technology, you can create and delete groceries seamlessly across multiple tabs or devices without the need for refreshing the page. It's a collaborative culinary experience like no other!
+One of the remarkable features of RecipesAI is its real-time grocery management system. By leveraging WebSocket technology, you can create and delete groceries seamlessly across multiple tabs or devices without the need for refreshing the page. It's a collaborative culinary experience like no other!
 
 ---
 
@@ -77,7 +77,7 @@ npm install
 npm start
 ```
 
-Now you're ready to delve into the code and enhance the RecipesAI-Frontend to your heart's content.
+Now you're ready to explore the code and enhance the RecipesAI-Frontend to your heart's content. Don't forget to go to the backend repository and run it as well.
 
 ## Contact
 If you have any questions, suggestions, or simply want to connect, don't hesitate to reach out to the project's creator:
