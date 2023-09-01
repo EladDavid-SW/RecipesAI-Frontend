@@ -36,7 +36,7 @@ Welcome to the RecipesAI-Frontend repository! This is the frontend component of 
 
 Experience the project in action by visiting the live demo:
 
-[RecipesAI-Frontend Demo](https://elad-ai-recipes.netlify.app)
+[RecipesAI Demo](https://elad-ai-recipes.netlify.app)
 
 ---
 
