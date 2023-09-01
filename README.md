@@ -1,8 +1,8 @@
 # RecipesAI-Frontend
 
-[Visit the RecipesAI-Frontend Website](https://elad-ai-recipes.netlify.app/recipe)
-
-![Recipe Example](https://recipes-elad-project.s3.us-west-2.amazonaws.com/GithubReadme.png)
+[Visit the RecipesAI-Frontend Website](https://elad-ai-recipes.netlify.app)
+[Go to the RecipesAI-Backend Repository](https://github.com/your-username/RecipesAI-Backend)
+![Recipe Example](https://recipes-elad-project.s3.us-west-2.amazonaws.com/GitHubWelcome.png)
 
 ---
 
@@ -34,7 +34,7 @@ Welcome to the RecipesAI-Frontend repository! This is the frontend component of 
 
 Experience the project in action by visiting the live demo:
 
-[RecipesAI-Frontend Demo](https://elad-ai-recipes.netlify.app/recipe)
+[RecipesAI-Frontend Demo](https://elad-ai-recipes.netlify.app)
 
 ---
 
