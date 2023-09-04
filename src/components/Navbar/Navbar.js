@@ -14,7 +14,18 @@ const Navbar = () => {
     <AppBar position='static' sx={{ borderBottom: '1px solid #474747', backgroundColor: '#212121', color: '#f6f4ee' }}>
       <Toolbar>
         <Box sx={{ flexGrow: 0.02 }} />
-        <Typography variant='h3' component='div' sx={{ fontWeight: 'bold', fontFamily: 'Roboto Condensed', margin: theme.spacing(2) }}>
+        <Typography
+          variant='h3'
+          component={Link}
+          to='/'
+          sx={{
+            fontWeight: 'bold',
+            fontFamily: 'Roboto Condensed',
+            margin: theme.spacing(2),
+            textDecoration: 'none',
+            color: 'inherit',
+          }}
+        >
           FlavorIt
         </Typography>
         <Box sx={{ flexGrow: 1 }} />
