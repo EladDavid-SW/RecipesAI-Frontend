@@ -1,15 +1,17 @@
-import React from 'react'
-import { Box, Typography, Button } from '@mui/material'
-import recipeImage from '../../images/recipe.png'
-import theme from '../../services/theme'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Box, Typography, Button, useMediaQuery } from '@mui/material';
+import recipeImage from '../../images/recipe.png';
+import theme from '../../services/theme';
+import { Link } from 'react-router-dom';
 
 const AboutUs = () => {
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
   return (
     <Box
       sx={{
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: isSmallScreen ? 'column' : 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         position: 'relative',
@@ -24,20 +26,34 @@ const AboutUs = () => {
           p: 2,
           backgroundColor: theme.palette.info.main,
           borderRadius: 1,
-          maxWidth: '40%',
-          textAlign: 'left', // Align the text to the left
+          maxWidth: isSmallScreen ? '100%' : '37%',
+          textAlign: 'left',
+          marginBottom: isSmallScreen ? '1rem' : 0,
         }}
       >
-        <Typography variant='h4' component='h1' gutterBottom sx={{ color: theme.palette.secondary.main }}>
+        <Typography variant='h4' component='h1' gutterBottom sx={{ color: theme.palette.secondary.main, fontSize: '2.5rem' }}>
           About FlavorIt
         </Typography>
-        <Typography variant='body1' gutterBottom sx={{ color: theme.palette.secondary.main }}>
-          FlavorIt is a website that helps the environment by providing you with delicious recipes that you can create using the groceries you have at home. We believe in sustainable cooking and
-          reducing food waste.
+        <Typography variant='body1' gutterBottom sx={{ color: theme.palette.secondary.main, fontSize: '1.4rem' }}>
+          FlavorIt empowers you to create delicious meals from ingredients you have at home while promoting sustainability.
         </Typography>
-        <Typography variant='body1' gutterBottom sx={{ color: theme.palette.secondary.main }}>
-          Our mission is to inspire and empower people to make creative and healthy meals using ingredients they already have. With FlavorIt, you can turn everyday groceries into amazing dishes and
-          contribute to a more sustainable world.
+        <Typography variant='body1' gutterBottom sx={{ color: theme.palette.secondary.main, fontSize: '1.5rem' }}>
+          <strong>Our Mission: Transforming Everyday Ingredients</strong>
+        </Typography>
+        <Typography variant='body1' gutterBottom sx={{ color: theme.palette.secondary.main, fontSize: '1.4rem' }}>
+          At FlavorIt, we turn your ingredients into extraordinary meals, reduce food waste, and make cooking accessible.
+        </Typography>
+        <Typography variant='body1' gutterBottom sx={{ color: theme.palette.secondary.main, fontSize: '1.5rem' }}>
+          <strong>What We Stand For:</strong>
+        </Typography>
+        <Typography variant='body1' gutterBottom sx={{ color: theme.palette.secondary.main, fontSize: '1.4rem' }}>
+          <strong>Sustainability:</strong> We encourage eco-friendly cooking practices using what's in your pantry.
+        </Typography>
+        <Typography variant='body1' gutterBottom sx={{ color: theme.palette.secondary.main, fontSize: '1.4rem' }}>
+          <strong>Creativity:</strong> FlavorIt is your canvas for culinary exploration and skill enhancement.
+        </Typography>
+        <Typography variant='body1' gutterBottom sx={{ color: theme.palette.secondary.main, fontSize: '1.4rem' }}>
+          <strong>Accessibility:</strong> No last-minute grocery runs needed. Your kitchen is full of inspiration.
         </Typography>
         <Button
           component={Link}
@@ -51,6 +67,7 @@ const AboutUs = () => {
             },
             marginTop: '1rem',
             width: '100%',
+            fontSize: '1.5rem',
           }}
         >
           Get Started
@@ -62,12 +79,12 @@ const AboutUs = () => {
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
-          width: '60%',
+          width: isSmallScreen ? '100%' : '60%',
           height: '100%',
         }}
       />
     </Box>
-  )
-}
+  );
+};
 
-export default AboutUs
+export default AboutUs;

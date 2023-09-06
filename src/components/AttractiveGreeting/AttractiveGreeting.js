@@ -1,15 +1,17 @@
-import React from 'react'
-import { Box, Typography, Button } from '@mui/material'
-import recipeImage from '../../images/recipe.png'
-import theme from '../../services/theme'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Box, Typography, Button, useMediaQuery } from '@mui/material';
+import recipeImage from '../../images/recipe.png';
+import theme from '../../services/theme';
+import { Link } from 'react-router-dom';
 
 const AttractiveGreeting = () => {
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
   return (
     <Box
       sx={{
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: isSmallScreen ? 'column' : 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         position: 'relative',
@@ -24,14 +26,18 @@ const AttractiveGreeting = () => {
           p: 2,
           backgroundColor: theme.palette.info.main,
           borderRadius: 1,
-          maxWidth: '40%',
+          maxWidth: isSmallScreen ? '100%' : '40%',
+          marginBottom: isSmallScreen ? '1rem' : 0,
         }}
       >
-        <Typography variant='h4' component='h1' gutterBottom sx={{ color: theme.palette.secondary.main }}>
-          Create Your Own Recipe
+        <Typography variant='h4' component='h1' gutterBottom sx={{ color: theme.palette.secondary.main, fontSize: '2.1rem' }}>
+          Explore Culinary Delights with FlavorIt
         </Typography>
-        <Typography variant='body1' gutterBottom sx={{ color: theme.palette.secondary.main }}>
-          Have a list of groceries and don't know what to make? <br/>Start creating your own recipe now and discover amazing meals you can prepare!
+        <Typography variant='body1' gutterBottom sx={{ color: theme.palette.secondary.main, fontSize: '1.4rem' }}>
+          Don't know what to cook with the ingredients you have? 
+        </Typography>
+        <Typography variant='body1' gutterBottom sx={{ color: theme.palette.secondary.main, fontSize: '1.4rem' }}>
+          Craft unique FlavorIt recipes and unlock a world of culinary creativity!
         </Typography>
         <Button
           component={Link}
@@ -43,8 +49,9 @@ const AttractiveGreeting = () => {
             '&:hover': {
               backgroundColor: theme.palette.success.dark,
             },
-            marginTop: '1rem', // Change the top margin to adjust the button's vertical position
-            width: '100%', // Set the button's width to occupy the full width of its container
+            marginTop: '1rem',
+            width: '100%',
+            fontSize: '1.5rem',
           }}
         >
           Get Started
@@ -56,12 +63,12 @@ const AttractiveGreeting = () => {
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
-          width: '60%',
+          width: isSmallScreen ? '100%' : '60%',
           height: '100%',
         }}
       />
     </Box>
-  )
-}
+  );
+};
 
-export default AttractiveGreeting
+export default AttractiveGreeting;

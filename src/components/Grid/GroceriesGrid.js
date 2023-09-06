@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 import Grocery from '../Grocery/Grocery'
 import './Grid.css'
 import axios from 'axios'
-import { Grid } from '@mui/material'
+import { Grid, Typography } from '@mui/material'
 import RecipeContent from '../Recipe/Recipe'
 import Popup from '../Popup/Popup'
 import AddGrocery from '../AddGrocery/AddGrocery'
 import AddIcon from '@mui/icons-material/Add'
 import createSocket from '../../services/sockets'
+import RecipePageHeader from '../RecipePageHeader/RecipePageHeader'
 
 const backendURL = process.env.REACT_APP_BACKEND_URL
 
@@ -17,7 +18,6 @@ function GroceriesGrid(props) {
   const [showRecipe, setShowRecipe] = useState(false)
   const [showAddGrocery, setShowAddGrocery] = useState(false)
   const [socket, setSocket] = useState(null)
-
 
   useEffect(() => {
     const newSocket = createSocket(
@@ -47,7 +47,6 @@ function GroceriesGrid(props) {
   function handleGroceryClick(grocery) {
     if (grocery.isMarked) setMarkedGroceries([...markedGroceries, grocery])
     else {
-      // excludes the unmarked grocery
       const newMarkedGroceries = markedGroceries.filter((groceryItem) => groceryItem.name !== grocery.name)
       setMarkedGroceries(newMarkedGroceries)
     }
@@ -59,41 +58,23 @@ function GroceriesGrid(props) {
 
   const handleDeleteImage = (imageName) => {
     console.log('delete')
-    if (socket.connected ) {
+    if (socket.connected) {
       socket.emit('deleteImage', imageName)
     }
   }
 
   return (
     <Grid container justifyContent='center'>
-      <Grid container spacing={2} justifyContent='center'>
-        <Grid item xs={12}>
-          <Grid container justifyContent='center' spacing={2}>
-            <h1
-              style={{
-                color: '#f0f0f0',
-                fontWeight: 'bold',
-                fontFamily: 'Courier New, monospace',
-                textAlign: 'center',
-                textShadow: '2px 2px 8px rgba(0, 0, 0, 0.5)',
-                textTransform: 'uppercase',
-                letterSpacing: '2px',
-              }}
-            >
-              Delicious Recipes
-            </h1>
-          </Grid>
-          <Grid container justifyContent='center'>
-            <div style={{ border: '1px solid #888', padding: '16px', marginTop: '16px' }}>
-              <p style={{ textAlign: 'center', color: '#888' }}>
-                Select the groceries you have from the list below.
-                <br /> Click the 'Add' button to include additional groceries.
-                <br /> Once you've made your selection, scroll down and click the 'Recipe Me' button.
-              </p>
-            </div>
-          </Grid>
-        </Grid>
+    <Grid container spacing={2} justifyContent='center'>
+      <RecipePageHeader />
 
+      <Grid container justifyContent='center' style={{ marginTop: '4%' }}>
+        <Grid item>
+          <Typography variant='h4' gutterBottom>
+            <span style={{ borderBottom: '2px solid #fffff', display: 'inline-block' }}>Ingredient Collection</span>
+          </Typography>
+        </Grid>
+      </Grid>
         <Grid item xs={12}>
           <Grid container justifyContent='center'>
             {images.map((image, index) => (
@@ -117,7 +98,7 @@ function GroceriesGrid(props) {
             </button>
           </Grid>
           <Grid container justifyContent='center'>
-            <h4 style={{ color: '#4caf50', fontWeight: 'bold', marginTop: '-10px' }}>Add Grocery</h4>
+            <h4 style={{ color: '#4caf50', fontWeight: 'bold', marginTop: '-10px' }}>Add Ingredient</h4>
           </Grid>
         </Grid>
         <Grid item xs={12}>
