@@ -63,9 +63,9 @@ function Recipe({ groceries }) {
             </Grid>
             <Grid item xs={12} md={6}>
               {imageLoaded ? (
-                <img src={image} alt='Recipe' style={{ width: '100%', height: '100%' }} />
+                <img src={image} alt='Recipe' style={{ width: '100%', height: '100%', marginTop: '8%' }} />
               ) : (
-                <img src={'https://media.tenor.com/n1GNGQYlVJ8AAAAi/kakaotalk-emoticon.gif'} alt='Recipe' style={{ width: '100%', height: '100%' }} />
+                <img src={'https://media.tenor.com/n1GNGQYlVJ8AAAAi/kakaotalk-emoticon.gif'} alt='Recipe' style={{ width: '80%', height: '80%', marginTop: '8%' }} />
               )}
             </Grid>
           </Grid>

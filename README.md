@@ -13,7 +13,7 @@
 - [Introduction](#introduction)
 - [Live Demo](#live-demo)
 - [Screenshot](#screenshot)
-- [Real-Time Grocery Management](#real-time-grocery-management)
+- [Real-Time Ingredient Management](#real-time-ingredient-management)
 - [Getting Started](#getting-started)
 - [Contact](#contact)
 
@@ -25,10 +25,10 @@ Welcome to the RecipesAI-Frontend repository! This is the frontend component of 
 
 **Project Highlights:**
 
-- Interactive selection of groceries.
+- Interactive selection of ingredients.
 - Recipe generation using ChatGPT.
 - Dynamic image generation with DALL·E.
-- Real-time grocery management with WebSocket support.
+- Real-time ingredient management with WebSocket support.
 
 ---
 
@@ -48,9 +48,9 @@ Here's a glimpse of what the RecipesAI-Frontend looks like:
 
 ---
 
-## Real-Time Grocery Management
+## Real-Time Ingredient Management
 
-One of the remarkable features of RecipesAI is its real-time grocery management system. By leveraging WebSocket technology, you can create and delete groceries seamlessly across multiple tabs or devices without the need for refreshing the page. It's a collaborative culinary experience like no other!
+One of the remarkable features of RecipesAI is its real-time ingredient management system. By leveraging WebSocket technology, you can create and delete ingredients seamlessly across multiple tabs or devices without the need for refreshing the page. It's a collaborative culinary experience like no other!
 
 ---
 
