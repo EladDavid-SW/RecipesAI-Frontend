@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Grid from '@mui/material/Grid'
 import CircularProgress from '@mui/material/CircularProgress'
+import { Button } from '@mui/material'
 
 const backendURL = process.env.REACT_APP_BACKEND_URL
 
@@ -10,39 +11,43 @@ function Recipe({ groceries }) {
   const [image, setImage] = useState('')
   const [imageLoaded, setImageLoaded] = useState(false)
 
-  useEffect(() => {
-    async function fetchRecipe() {
-      try {
-        const ingredients = groceries.map((grocery) => grocery.name).join(', ')
-        const response = await axios.post(`${backendURL}/chatGPT`, {
-          message:
-            `make me a recipe from this ingredients: ` +
-            ingredients +
-            `.  give me the answer in json format:{"title": "", "ingredients": ["",""], "instructions": ["",""]} and make sure to not add Bad control character for js json parser in the string literal`,
-        })
+  async function fetchRecipe() {
+    try {
+      setRecipeDetails(null)
+      setImage('')
+      setImageLoaded(false)
+      const ingredients = groceries.map((grocery) => grocery.name).join(', ')
+      const response = await axios.post(`${backendURL}/chatGPT`, {
+        message:
+          `make me a recipe from this only this ingredients: ` +
+          ingredients +
+          `.  give me the answer in json format:{"title": "", "ingredients": ["",""], "instructions": ["",""]} and make sure to not add Bad control character for js json parser in the string literal`,
+      })
 
-        console.log(response.data.message)
-        let json = JSON.parse(response.data.message)
-        console.log(json)
-        setRecipeDetails(json)
+      console.log(response.data.message)
+      let json = JSON.parse(response.data.message)
+      console.log(json)
+      setRecipeDetails(json)
 
-        const responseDaliE = await axios.post(`${backendURL}/dali_e/`, {
-          prompts: [{ prompt: `bright warm white background with an image of ${json.title} `, name: 'name' }],
-        })
-        console.log(responseDaliE.data)
-        let image_url = responseDaliE.data.images[0]
-        setImage(image_url.url)
-        console.log(image_url.url)
-        setImageLoaded(true)
-      } catch (error) {
-        console.error('Error:', error)
-        if (error.message.includes('JSON')) {
-          fetchRecipe()
-        } else {
-          throw error
-        }
+      const responseDaliE = await axios.post(`${backendURL}/dali_e/`, {
+        prompts: [{ prompt: `bright warm white background with an image of ${json.title} `, name: 'name' }],
+      })
+      console.log(responseDaliE.data)
+      let image_url = responseDaliE.data.images[0]
+      setImage(image_url.url)
+      console.log(image_url.url)
+      setImageLoaded(true)
+    } catch (error) {
+      console.error('Error:', error)
+      if (error.message.includes('JSON')) {
+        fetchRecipe()
+      } else {
+        throw error
       }
     }
+  }
+
+  useEffect(() => {
     fetchRecipe()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -65,8 +70,22 @@ function Recipe({ groceries }) {
               {imageLoaded ? (
                 <img src={image} alt='Recipe' style={{ width: '100%', height: '100%', marginTop: '8%' }} />
               ) : (
-                <img src={'https://media.tenor.com/n1GNGQYlVJ8AAAAi/kakaotalk-emoticon.gif'} alt='Recipe' style={{ width: '80%', height: '80%', marginTop: '8%' }} />
+               
+                  <Grid item xs={12}>
+                    <Grid container justifyContent='center'>
+                      <img src={'https://media.tenor.com/n1GNGQYlVJ8AAAAi/kakaotalk-emoticon.gif'} alt='Recipe' style={{ width: '80%', height: '80%', marginTop: '8%' }} />
+                      <h3 style={{ marginLeft: '17%', marginTop:'7%' }}>Generating recipe image</h3>
+                    </Grid>
+                  </Grid>
+            
               )}
+            </Grid>
+            <Grid item xs={12}>
+              <Grid container justifyContent='center'>
+                <button className='button' style={{ width: '40%', marginTop: '3%' }} onClick={fetchRecipe}>
+                  Regenerate Recipe
+                </button>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
