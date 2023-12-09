@@ -49,7 +49,7 @@ const AddGrocery = ({ onSubmit }) => {
           setShowGreenIcon(false)
           onSubmit(false)
         }, 2000)
-      }, 11000)
+      }, 6000)
     })
 
     socket.on('disconnect', () => {
